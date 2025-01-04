@@ -24,3 +24,20 @@ s: 套接字 (Socket)
 
 `chmod -X`: 为目录添加执行权限，文件不添加
 `chmod -R`: 递归修改目录下的所有文件和子目录的权限
+
+
+
+```
+lzww@lzww-VMware-Virtual-Platform:~/Desktop/Unix-Programming/File&Directory$ umask
+0002
+lzww@lzww-VMware-Virtual-Platform:~/Desktop/Unix-Programming/File&Directory$ umask -S
+u=rwx,g=rwx,o=rx
+```
+
+* 当你只输入 `umask` 命令而不带任何参数时，它会显示当前用户的 `umask` 值。
+* `0002` 是一个八进制数，表示当前的 `umask` 设置。
+* 从右到左，每一位数字分别代表：
+    * **最后一位 (2):**  针对**其他用户 (others)** 的权限。八进制的 `2` 对应二进制的 `010`，表示**禁止其他用户拥有写权限**。
+    * **中间一位 (0):** 针对**所属组用户 (group)** 的权限。八进制的 `0` 对应二进制的 `000`，表示**不禁止所属组用户的任何权限**。
+    * **第一位 (0):** 针对**文件所有者 (user)** 的权限。八进制的 `0` 对应二进制的 `000`，表示**不禁止文件所有者的任何权限**。
+    * **最前面一位 (0):**  表示特殊权限位（SetUID, SetGID, Sticky bit），这里没有屏蔽任何特殊权限。
